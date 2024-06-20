@@ -1,51 +1,87 @@
 import 'package:flutter/material.dart';
+import 'screens/home_screen.dart';
+import 'screens/bible_screen.dart';
+import 'screens/search_screen.dart';
+import 'screens/favorites_screen.dart';
+import 'screens/settings_screen.dart';
 
 void main() {
-  runApp(App());
+  runApp(const BibleApp());
 }
 
-class App extends StatelessWidget {
+class BibleApp extends StatelessWidget {
+  const BibleApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(
-      backgroundColor: Color(0xFF181818),
-      body: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 40,
+      title: 'Bible App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  HomePageState createState() => HomePageState();
+}
+
+class HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+  static final List<Widget> _widgetOptions = <Widget>[
+    const HomeScreen(),
+    const BibleScreen(),
+    const SearchScreen(),
+    const FavoritesScreen(),
+    const SettingsScreen(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Bible App'),
+      ),
+      body: _widgetOptions.elementAt(_selectedIndex),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  SizedBox(
-                    height: 80,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        'Hey, Selena',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 28,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                      Text(
-                        'Welcome back',
-                        style: TextStyle(
-                          color: Colors.white.withOpacity(0.6),
-                          fontSize: 18,
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              )
-            ],
-          )),
-    ));
+          BottomNavigationBarItem(
+            icon: Icon(Icons.book),
+            label: 'Bible',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'Favorites',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.blue,
+        unselectedItemColor: Colors.grey,
+        onTap: _onItemTapped,
+      ),
+    );
   }
 }
