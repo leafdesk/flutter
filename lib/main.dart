@@ -3,7 +3,7 @@ import 'package:bible_app/pages/bible_page.dart';
 import 'package:bible_app/pages/favorites_page.dart';
 import 'package:bible_app/pages/home_page.dart';
 import 'package:bible_app/pages/search_page.dart';
-import 'package:bible_app/pages/settings_page.dart';
+import 'package:bible_app/pages/settings/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -44,9 +44,9 @@ class MainPage extends StatelessWidget {
     final AppController controller = Get.put(AppController());
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Bible App'),
-      ),
+      // appBar: AppBar(
+      //   title: const Text('Bible App'),
+      // ),
       body: Obx(
         () => _widgetOptions.elementAt(controller.currentIndex.value),
       ),
