@@ -26,4 +26,16 @@ class TestRepository {
       return DataLocalFailed(e.toString());
     }
   }
+
+  Future<DataState<TestUserModel>> getTestUserById(String id) async {
+    try {
+      final response = await _testApi.getTestUserById(id);
+      return DataSuccess(response);
+    } on DioException catch (e) {
+      debugPrint("$e");
+      return DataFailed(e);
+    } catch (e) {
+      return DataLocalFailed(e.toString());
+    }
+  }
 }

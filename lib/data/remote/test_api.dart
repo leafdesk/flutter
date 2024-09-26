@@ -12,6 +12,10 @@ abstract class TestApi {
   @GET('/v0/users')
   Future<TestUserResponse> getTestUsers();
 
+  // [테스트] ID로 유저 조회.
+  @GET('/v0/users/{id}')
+  Future<TestUserModel> getTestUserById(@Path("id") String id);
+
   // // 데이터 생성/등록 API 예제
   // @POST('/api/create')
   // Future<dynamic> createData(@Body() Map<String, dynamic> data);

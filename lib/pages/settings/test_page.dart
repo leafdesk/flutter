@@ -30,7 +30,7 @@ class _TestPageState extends State<TestPage> {
             return Card(
               margin: const EdgeInsets.all(8.0),
               child: ListTile(
-                title: Text(user.name),
+                title: Text(_testController.selectedUserName.value),
                 subtitle: Text('Age: ${user.age}, Valid: ${user.isValid}'),
                 trailing: Text('ID: ${user.id}'),
               ),
